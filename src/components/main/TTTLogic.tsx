@@ -7,7 +7,7 @@ function TTTLogic() {
 
   useEffect(() => {
     checkWinner();
-  }, [board]); // Ejecuta checkWinner cada vez que el tablero cambia
+  }, [board]);
 
   function checkWinner() {
     const winningCombinations = [
@@ -24,13 +24,12 @@ function TTTLogic() {
     for (const combination of winningCombinations) {
       const [a, b, c] = combination;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        setTimeout(() => alert(`Ganador: ${board[a]}`), 0); // Asegura que el estado se actualice antes de alertar
-        setBoard(Array(9).fill('')); // Reinicia el tablero
-        setPrevMove("O")
+        setTimeout(() => alert(`Ganador: ${board[a]}`), 0);
+        setBoard(Array(9).fill(''));
+        setPrevMove('O');
         return;
       }
     }
-
   }
 
   function drawMove(cellId: number) {
@@ -46,6 +45,7 @@ function TTTLogic() {
 
   return (
     <>
+      <h1>Turno actual: {prevMove === 'X' ? 'O' : 'X'}</h1> {/* Muestra el turno actual */}
       <div className="table-container">
         <table>
           <tbody>
