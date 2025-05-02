@@ -57,6 +57,9 @@ function TTTLogic() {
   }
 
   function drawMove(cellId: number) {
+    if (winner || isDraw)
+      return;
+
     if (board[cellId] === '') {
       const newBoard = [...board];
       newBoard[cellId] = prevMove === 'X' ? 'O' : 'X';
