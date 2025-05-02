@@ -29,8 +29,8 @@ function TTTLogic() {
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]); // Set the winner
         setShowMessage(true); // Show the message
-        setTimeout(() => setShowMessage(false), 1000); // Hide the message after 1 second
-        setTimeout(() => setBoard(Array(9).fill('')), 1500); // Reset the board after 1.5 seconds
+        setTimeout(() => setShowMessage(false), 3000); // Hide the message after 1 second
+        setTimeout(() => setBoard(Array(9).fill('')), 3000); // Reset the board after 1.5 seconds
         setPrevMove('O');
         return;
       }
@@ -45,13 +45,19 @@ function TTTLogic() {
       setPrevMove(prevMove === 'X' ? 'O' : 'X');
     } else {
       setShowMessage(true); // Show the message for an occupied cell
-      setTimeout(() => setShowMessage(false), 1000); // Hide the message after 1 second
+      setTimeout(() => setShowMessage(false), 3000); // Hide the message after 1 second
     }
   }
 
   return (
     <>
-      {winner && <Confetti />} {/* Show confetti when there is a winner */}
+      {winner && (
+        <Confetti 
+          gravity={0.5}
+          wind={0.05}
+          recycle={false} // Confetti stops automatically
+        />
+      )}
       {showMessage && (
         <div className="message">
           {winner ? `¡Ganador: ${winner}!` : 'Celda ocupada'}
