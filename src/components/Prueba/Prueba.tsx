@@ -17,24 +17,29 @@ function Prueba() {
   }
 
   return (
-    <div className="table-container">
-      <table>
-        <tbody>
-          {Array.from({ length: 3 }, (_, i) => (
-            <tr key={i}>
-              {Array.from({ length: 3 }, (_, j) => {
-                const cellId = i * 3 + j;
-                return (
-                  <td key={cellId} onClick={() => drawMove(cellId)}>
-                    {board[cellId]}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="table-container">
+        <table>
+          <tbody>
+            {Array.from({ length: 3 }, (_, i) => (
+              <tr key={i}>
+                {Array.from({ length: 3 }, (_, j) => {
+                  const cellId = i * 3 + j;
+                  return (
+                    <td key={cellId} onClick={() => drawMove(cellId)}>
+                      {board[cellId]}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <button className="reset-button" onClick={() => setBoard(Array(9).fill(''))}>
+        Reiniciar
+      </button>
+    </>
   );
 }
 
