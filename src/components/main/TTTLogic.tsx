@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import './Prueba.css';
+import './TTTLogic.css';
 
-function Prueba() {
+function TTTLogic() {
   const [board, setBoard] = useState(Array(9).fill(''));
   const [prevMove, setPrevMove] = useState('O');
 
@@ -71,4 +71,4 @@ function Prueba() {
   );
 }
 
-export default Prueba;
+export default TTTLogic;

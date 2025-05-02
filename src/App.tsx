@@ -1,10 +1,10 @@
-import Prueba from './components/Prueba/Prueba'
+import TTTLogic from './components/main/TTTLogic'
 
 function App() {
 
   return (
     <>
-      <Prueba />
+      <TTTLogic />
     </>
   )
 }
