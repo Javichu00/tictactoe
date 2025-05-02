@@ -3,26 +3,21 @@ import './Prueba.css'
 
 function Prueba() {
 
+
+
   return (
     <>
       <div className="table-container">
         <table>
           <tbody>
-              <tr>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
+            {Array.from({ length: 3 }, (_, i) => (
+              <tr key={i}>
+                {Array.from({ length: 3 }, (_, j) => (
+                  {const cellId = i*3+j+1}
+                  <td key={j} onClick={function1()}>Cell </td>
+                ))}
               </tr>
-              <tr>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-              </tr>
+            ))}
           </tbody>
         </table>
       </div>
