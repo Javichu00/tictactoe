@@ -112,11 +112,7 @@ function TTTLogic() {
       </div>
       <button
         className="reset-button"
-        onClick={() => {
-          setBoard(Array(9).fill(''));
-          setWinner(null);
-          setIsDraw(false);
-        }}
+        onClick={resetGame}
       >
         Reiniciar
       </button>
