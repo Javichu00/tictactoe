@@ -4,7 +4,7 @@ import Confetti from 'react-confetti';
 
 function TTTLogic() {
   const [board, setBoard] = useState(Array(9).fill(''));
-  const [prevMove, setPrevMove] = useState('O');
+  const [currentMove, setCurrentMove] = useState('X');
   const [winner, setWinner] = useState<string | null>(null);
   const [showMessage, setShowMessage] = useState(false);
   const [isDraw, setIsDraw] = useState(false); // Estado para manejar el empate
@@ -37,7 +37,7 @@ function TTTLogic() {
         setShowMessage(true);
         setTimeout(() => setShowMessage(false), 3000);
         setTimeout(() => setBoard(Array(9).fill('')), 3000);
-        setPrevMove('O');
+        setCurrentMove('X');
         return;
       }
     }
@@ -51,7 +51,7 @@ function TTTLogic() {
         setShowMessage(false);
         setIsDraw(false); // Reinicia el estado de empate
         setBoard(Array(9).fill('')); // Reinicia el tablero
-        setPrevMove('O');
+        setCurrentMove('X');
       }, 3000);
     }
   }
@@ -62,9 +62,9 @@ function TTTLogic() {
 
     if (board[cellId] === '') {
       const newBoard = [...board];
-      newBoard[cellId] = prevMove === 'X' ? 'O' : 'X';
+      newBoard[cellId] = currentMove;
       setBoard(newBoard);
-      setPrevMove(prevMove === 'X' ? 'O' : 'X');
+      setCurrentMove(currentMove === 'X' ? 'O' : 'X');
     } else {
       setShowMessage(true);
       setTimeout(() => setShowMessage(false), 3000);
@@ -89,7 +89,7 @@ function TTTLogic() {
             : 'Celda ocupada'}
         </div>
       )}
-      <h1>Turno actual: {prevMove === 'X' ? 'O' : 'X'}</h1>
+      <h1>Turno actual: {currentMove}</h1>
       <div className="table-container">
         <table>
           <tbody>
