@@ -9,6 +9,7 @@ function TTTLogic() {
   const [winner, setWinner] = useState<string | null>(null);
   const [isDraw, setIsDraw] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [isConffettiRunnng, setIsConffettiRunning] = useState(false);
 
   useEffect(() => {
     checkWinner();
@@ -39,6 +40,7 @@ function TTTLogic() {
       const [a, b, c] = combination;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]);
+        setIsConffettiRunning(true);
         setShowMessage(true);
         setTimeout(resetGame, 3000);
         return;
@@ -71,11 +73,13 @@ function TTTLogic() {
 
   return (
     <>
-      {winner && (
+      {isConffettiRunnng && (
         <Confetti 
           gravity={0.5}
           wind={0.05}
           recycle={false}
+          numberOfPieces={100}
+          onConfettiComplete={() => {setIsConffettiRunning(false)}}
         />
       )}
       {showMessage && (
