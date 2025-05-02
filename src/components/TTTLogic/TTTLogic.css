@@ -78,7 +78,7 @@ body {
   font-size: 18px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   z-index: 1000;
-  animation: fadeOut 1s ease-in-out forwards;
+  animation: fadeOut 1s ease-in-out 2s forwards;
 }
 
 @keyframes fadeOut {
