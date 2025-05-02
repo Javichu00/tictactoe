@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import './TTTLogic.css';
-import Confetti from 'react-confetti'; // Install this package using `npm install react-confetti`
+import Confetti from 'react-confetti';
 
 function TTTLogic() {
   const [board, setBoard] = useState(Array(9).fill(''));
   const [prevMove, setPrevMove] = useState('O');
-  const [winner, setWinner] = useState<string | null>(null); // State to track the winner
-  const [showMessage, setShowMessage] = useState(false); // State to show/hide the message
+  const [winner, setWinner] = useState<string | null>(null);
+  const [showMessage, setShowMessage] = useState(false);
+  const [isDraw, setIsDraw] = useState(false); // Estado para manejar el empate
 
   useEffect(() => {
     checkWinner();
+    checkDraw();
   }, [board]);
 
   function checkWinner() {
@@ -27,13 +29,30 @@ function TTTLogic() {
     for (const combination of winningCombinations) {
       const [a, b, c] = combination;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        setWinner(board[a]); // Set the winner
-        setShowMessage(true); // Show the message
-        setTimeout(() => setShowMessage(false), 3000); // Hide the message after 1 second
-        setTimeout(() => setBoard(Array(9).fill('')), 3000); // Reset the board after 1.5 seconds
+        setWinner(null);
+        setTimeout(() => {
+          setWinner(board[a]);
+        }, 50);
+
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 3000);
+        setTimeout(() => setBoard(Array(9).fill('')), 3000);
         setPrevMove('O');
         return;
       }
+    }
+  }
+
+  function checkDraw() {
+    if (board.every(cell => cell !== '') && !winner) {
+      setIsDraw(true); // Establece el estado de empate
+      setShowMessage(true);
+      setTimeout(() => {
+        setShowMessage(false);
+        setIsDraw(false); // Reinicia el estado de empate
+        setBoard(Array(9).fill('')); // Reinicia el tablero
+        setPrevMove('O');
+      }, 3000);
     }
   }
 
@@ -44,8 +63,8 @@ function TTTLogic() {
       setBoard(newBoard);
       setPrevMove(prevMove === 'X' ? 'O' : 'X');
     } else {
-      setShowMessage(true); // Show the message for an occupied cell
-      setTimeout(() => setShowMessage(false), 3000); // Hide the message after 1 second
+      setShowMessage(true);
+      setTimeout(() => setShowMessage(false), 3000);
     }
   }
 
@@ -55,12 +74,16 @@ function TTTLogic() {
         <Confetti 
           gravity={0.5}
           wind={0.05}
-          recycle={false} // Confetti stops automatically
+          recycle={false}
         />
       )}
       {showMessage && (
         <div className="message">
-          {winner ? `¡Ganador: ${winner}!` : 'Celda ocupada'}
+          {winner
+            ? `¡Ganador: ${winner}!`
+            : isDraw
+            ? '¡Empate!'
+            : 'Celda ocupada'}
         </div>
       )}
       <h1>Turno actual: {prevMove === 'X' ? 'O' : 'X'}</h1>
@@ -87,6 +110,7 @@ function TTTLogic() {
         onClick={() => {
           setBoard(Array(9).fill(''));
           setWinner(null);
+          setIsDraw(false);
         }}
       >
         Reiniciar

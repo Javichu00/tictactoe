@@ -1,4 +1,4 @@
-import TTTLogic from './components/main/TTTLogic'
+import TTTLogic from './components/TTTLogic/TTTLogic'
 
 function App() {
 
