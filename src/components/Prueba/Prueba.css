@@ -3,21 +3,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+  font-family: 'Arial', sans-serif;
+  background-color: #121212; /* Fondo oscuro */
+  color: #ffffff; /* Texto claro */
 }
 
 .table-container {
@@ -29,22 +17,51 @@
 
 table {
   border-collapse: collapse;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para el tablero */
+  background-color: #1e1e1e; /* Fondo del tablero */
 }
 
 td {
-  font-size: 100px;
-  width: 340px;
-  height: 340px;
-  border: 1px solid black;
+  font-size: 75px;
+  width: 200px;
+  height: 200px;
+  border: 2px solid #474747; /* Bordes oscuros */
   text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #ffffff; /* Texto claro */
+}
+
+td:hover {
+  background-color: #333333; /* Fondo más claro al pasar el mouse */
 }
 
 .reset-button {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #0056b3; /* Azul brillante */
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.reset-button:hover {
+  background-color: #007bff; /* Azul más oscuro al pasar el mouse */
+  transform: scale(1.05); /* Efecto de zoom */
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #ffffff; /* Texto claro */
+  margin-bottom: 20px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #121212; /* Fondo oscuro */
 }
