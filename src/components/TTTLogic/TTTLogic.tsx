@@ -2,17 +2,26 @@ import { useState, useEffect } from 'react';
 import './TTTLogic.css';
 import Confetti from 'react-confetti';
 
+
 function TTTLogic() {
   const [board, setBoard] = useState(Array(9).fill(''));
   const [currentMove, setCurrentMove] = useState('X');
   const [winner, setWinner] = useState<string | null>(null);
+  const [isDraw, setIsDraw] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const [isDraw, setIsDraw] = useState(false); // Estado para manejar el empate
 
   useEffect(() => {
     checkWinner();
     checkDraw();
   }, [board]);
+
+  function resetGame() {
+    setBoard(Array(9).fill(''));
+    setCurrentMove('X');
+    setWinner(null);
+    setIsDraw(false);
+    setShowMessage(false);
+  }
 
   function checkWinner() {
     const winningCombinations = [
@@ -29,15 +38,9 @@ function TTTLogic() {
     for (const combination of winningCombinations) {
       const [a, b, c] = combination;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        setWinner(null);
-        setTimeout(() => {
-          setWinner(board[a]);
-        }, 50);
-
+        setWinner(board[a]);
         setShowMessage(true);
-        setTimeout(() => setShowMessage(false), 3000);
-        setTimeout(() => setBoard(Array(9).fill('')), 3000);
-        setCurrentMove('X');
+        setTimeout(resetGame, 3000);
         return;
       }
     }
@@ -47,12 +50,7 @@ function TTTLogic() {
     if (board.every(cell => cell !== '') && !winner) {
       setIsDraw(true); // Establece el estado de empate
       setShowMessage(true);
-      setTimeout(() => {
-        setShowMessage(false);
-        setIsDraw(false); // Reinicia el estado de empate
-        setBoard(Array(9).fill('')); // Reinicia el tablero
-        setCurrentMove('X');
-      }, 3000);
+      setTimeout(resetGame, 3000);
     }
   }
 
